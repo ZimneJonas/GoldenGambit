@@ -1,15 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Game from './pages/Game';
+import SetupBoard from './pages/SetupBoard';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/">
-          <Game />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/game" element={<Game />} />
+        <Route path="/" element={<SetupBoard />} />
+      </Routes>
     </Router>
   );
 }
