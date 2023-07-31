@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+// SetupBoard.jsx
 import { Link } from 'react-router-dom';
-import ChessBoard from '../components/ChessBoard';
+import SetupBlack from '../components/SetupBlack';
+import SetupWhite from '../components/SetupWhite';
+import './DisplayBoard.css';
 
-function SetupBoard() {
-    const [fen, setFen] = useState('8/8/8/8/4K3/8/8/4k3 w - - 0 1');
-
+function SetupBoard({ color }) {
   return (
-    <div>
-      <ChessBoard fen={fen} setFen={setFen} canSetup={true} />
-      <Link to={`/game?fen=${fen}`}>Start Game</Link>
+    <div className="display-board">
+      {color === 'black' ? <SetupBlack /> : <SetupWhite />}
+      <Link to="/">Menu</Link>
     </div>
   );
 }

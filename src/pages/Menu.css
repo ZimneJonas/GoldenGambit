@@ -1,0 +1,22 @@
+/* Menu.css */
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This makes the div take up the full height of the screen */
+  gap: 20px; /* This adds some space between the buttons */
+}
+
+.menu a {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #050608;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #0056b3;
+}
