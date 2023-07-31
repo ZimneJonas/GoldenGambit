@@ -4,11 +4,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* This makes the div take up the full height of the screen */
+  height: 100vh; 
   gap: 20px; /* This adds some space between the buttons */
 }
 
 .menu a {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; min-width: 150px;
   padding: 10px 20px;
   text-decoration: none;
   color: #fff;

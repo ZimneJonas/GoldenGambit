@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js';
+import { generateFen } from './ChessLogic';
 
 function PlayMode() {
-  const [fen, setFen] = useState(localStorage.getItem('fen') || 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+  const [fen, setFen] = useState(localStorage.getItem('fen') || generateFen());
 
   useEffect(() => {
     localStorage.setItem('fen', fen);

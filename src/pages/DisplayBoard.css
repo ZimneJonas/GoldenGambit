@@ -5,10 +5,11 @@
     align-items: center;
     justify-content: center;
     height: 100vh; /* occupy the full viewport height */
-    margin-top: -130px;
+    margin-top: -103px;
 }
 
 .display-board a {
+    margin-top: 20px;
     padding: 10px 20px;
     text-decoration: none;
     color: #fff;

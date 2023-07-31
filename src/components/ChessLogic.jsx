@@ -1,50 +1,45 @@
+export function generateFen() {
+  const whitePosition = JSON.parse(localStorage.getItem('whitePosition')) || {};
+  const blackPosition = JSON.parse(localStorage.getItem('blackPosition')) || {};
 
+  let fen = "";
 
+  for (let rank = 8; rank >= 1; rank--) {
+    let emptySquares = 0;
 
-export function fenToPositionObj(fen) {
-    // Define a mapping from FEN characters to piece names that can be recognized by chessboardjsx
-    const piecesMap = {
-      r: 'bR',
-      n: 'bN',
-      b: 'bB',
-      q: 'bQ',
-      k: 'bK',
-      p: 'bP',
-      R: 'wR',
-      N: 'wN',
-      B: 'wB',
-      Q: 'wQ',
-      K: 'wK',
-      P: 'wP',
-    };
-  
-    // Extract the piece placement part from the FEN string
-    const [pieces] = fen.split(' ');
-  
-    // Initialize the row and column indices for iterating over the squares of the board
-    let row = 8;
-    let col = 0;
-  
-    // Iterate over each rank in the piece placement part
-    return pieces.split('/').reduce((acc, cur) => {
-      [...cur].forEach((char) => {
-        // If the character is a piece (not a number)
-        if (isNaN(parseInt(char, 10))) {
-          // Add the piece to the position object with the square (file + rank) as the key
-          acc[String.fromCharCode(97 + col) + row] = piecesMap[char];
-          // Increment the column index
-          col += 1;
-        } else {
-          // If the character is a number, increment the column index by that number
-          col += parseInt(char, 10);
+    for (let file of "abcdefgh") {
+      const square = `${file}${rank}`;
+      
+      let piece = null;
+      if (rank < 4) {
+        piece = whitePosition[square];
+        if (piece) piece = piece[1];
+      } else if (rank >= 6) {
+        piece = blackPosition[square];
+        if (piece) piece = piece[1].toLowerCase();
+      }
+      
+      if (piece) {
+        if (emptySquares > 0) {
+          fen += emptySquares;
+          emptySquares = 0;
         }
-      });
-  
-      // Decrement the row index and reset the column index after processing each rank
-      row -= 1;
-      col = 0;
-  
-      // Return the updated position object
-      return acc;
-    }, {});
+        fen += piece;
+      } else {
+        emptySquares++;
+      }
+    }
+
+    if (emptySquares > 0) {
+      fen += emptySquares;
+    }
+
+    if (rank > 1) {
+      fen += "/";
+    }
   }
+
+  fen += " w KQkq - 0 1";
+
+  return fen;
+}

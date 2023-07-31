@@ -1,21 +1,27 @@
-import { fenToPositionObj } from './ChessLogic';
+import React, { useState, useEffect } from 'react';
 import Chessboard from 'chessboardjsx';
-import React, { useState } from 'react';
 
 function SetupBlack() {
-    const [position, setPosition] = useState(fenToPositionObj('rnbqkbnr/pppppppp/8/8/8/8/8/8 w KQkq - 0 1'));
+    const [position, setPosition] = useState({
+        a8: 'bR', b8: 'bN', c8: 'bB', d8: 'bQ', e8: 'bK', f8: 'bB', g8: 'bN', h8: 'bR',
+        a7: 'bP', b7: 'bP', c7: 'bP', d7: 'bP', e7: 'bP', f7: 'bP', g7: 'bP', h7: 'bP'
+    });
+
+    useEffect(() => {
+      localStorage.setItem('blackPosition', JSON.stringify(position));
+    }, [position]); 
+    
   
-    const onDrop = ({ sourceSquare, targetSquare }) => {
-      if (parseInt(targetSquare[1]) < 6) {
-        return;  // Disallow moves to rows 1-5
-      }
-  
-      const newPosition = { ...position };
-      newPosition[targetSquare] = newPosition[sourceSquare];
-  
-      delete newPosition[sourceSquare];
-  
-      setPosition(newPosition);
+    const onDrop = ({ sourceSquare, targetSquare, piece }) => {
+        if (parseInt(targetSquare[1]) < 6) {
+            return;  // Disallow moves to rows 1-5
+        }
+
+        const newPosition = { ...position };
+        if (sourceSquare !== 'spare') { delete newPosition[sourceSquare]; }
+        newPosition[targetSquare] = piece;
+        
+        setPosition(newPosition);
     };
   
     return (
