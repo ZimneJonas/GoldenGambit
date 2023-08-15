@@ -1,3 +1,7 @@
+##########################
+# Creates Structure for overview. 
+##########################
+
 # Define paths
 $RootPath = Get-Location
 $SrcPath = "$RootPath\src"
