@@ -1,3 +1,7 @@
+
+// Chess.js only allows Fen to play. Which doesn't allow illigal positions.
+// In Setup you wont see oposing king and are allowed to temporally create illigal positons. 
+// Translate dictonary to Fen representation for using Chess.js:
 export function generateFen() {
   const whitePosition = JSON.parse(localStorage.getItem('whitePosition')) || {};
   const blackPosition = JSON.parse(localStorage.getItem('blackPosition')) || {};
