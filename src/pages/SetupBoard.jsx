@@ -6,7 +6,7 @@ import './DisplayBoard.css';
 
 function SetupBoard({ color }) {
   return (
-    <div className="display-board">
+    <div className="setup-board">
       {color === 'black' ? <SetupBlack /> : <SetupWhite />}
       <Link to="/">Menu</Link>
     </div>
