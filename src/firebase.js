@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-// If you're also using Analytics, import it as well
+import { getAuth, connectAuthEmulator, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously  } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -19,8 +18,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Auth and Analytics
+// Initialize Firebase Auth
 const auth = getAuth(app);
-const analytics = getAnalytics(app);  // Only if you're using Analytics
 
-export { auth, analytics };  // Export for use in other parts of your app
+// Connect to the emulated Firebase Auth service when running locally
+if (window.location.hostname === "localhost") {
+  connectAuthEmulator(auth, 'http://localhost:9099'); 
+}
+
+// Initialize Firebase Analytics
+const analytics = getAnalytics(app); 
+
+export { auth, analytics, signInAnonymously, createUserWithEmailAndPassword, signInWithEmailAndPassword };

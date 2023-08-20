@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js';
 import { generateFen } from './ChessLogic';
+import useResizableBoard from '../utils/useResizableBoard.jsx';
 
 function PlayMode() {
   const [fen, setFen] = useState(localStorage.getItem('fen') || generateFen());
@@ -30,10 +31,12 @@ function PlayMode() {
 
     setFen(chess.fen());
   };
-
+   
+  const boardWidth = useResizableBoard();
   return (
     <Chessboard
       position={fen}
+      width={boardWidth}
       onDrop={onDrop}
       draggable={true}
     />

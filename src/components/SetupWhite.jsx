@@ -1,5 +1,6 @@
 import Chessboard from 'chessboardjsx';
 import React, { useState, useEffect  } from 'react';
+import useResizableBoard from '../utils/useResizableBoard.jsx';
 
 function SetupWhite() {
   const [position, setPosition] = useState({
@@ -22,23 +23,24 @@ function SetupWhite() {
 
     // trigger a re-rende
     setPosition(newPosition);
-};
+  };
 
-
-    return (
-      <Chessboard
-        position={position}
-        sparePieces={true}
-        squareStyles={{
-            ...Array.from({ length: 5 }, (_, i) => i + 4).flatMap(i =>
-              'abcdefgh'.split('').map(file => `${file}${i}`)
-            ).reduce((acc, square) => ({ ...acc, [square]: { backgroundColor: 'rgba(0, 0, 0, 0.4)' } }), {})
-          }}
-        onDrop={onDrop}
-        draggable={true}
-      />
-    );
-  }
+  const boardWidth = useResizableBoard();
+  return (
+    <Chessboard
+      position={position}
+      width={boardWidth}
+      sparePieces={true}
+      squareStyles={{
+          ...Array.from({ length: 5 }, (_, i) => i + 4).flatMap(i =>
+            'abcdefgh'.split('').map(file => `${file}${i}`)
+          ).reduce((acc, square) => ({ ...acc, [square]: { backgroundColor: 'rgba(0, 0, 0, 0.4)' } }), {})
+        }}
+      onDrop={onDrop}
+      draggable={true}
+    />
+  );
+}
   
   export default SetupWhite;
   
