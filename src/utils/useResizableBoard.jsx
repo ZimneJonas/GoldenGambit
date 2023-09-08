@@ -6,6 +6,7 @@ function useBoardSize(initialScale = 0.8) {
 
   useEffect(() => {
     const handleResize = () => {
+      //TODO scale better with window.innerWidth
       setBoardSize(window.innerHeight * initialScale);
     };
 

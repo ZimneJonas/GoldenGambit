@@ -1,3 +1,4 @@
+//src\pages\Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, signInAnonymously, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '../firebase';
@@ -46,7 +47,7 @@ function Login() {
           <button onClick={handleSignIn}>Sign In</button>
           <button onClick={handleSignUp}>Sign Up</button>
       <button onClick={handleGuestLogin}>Continue as Guest</button>
-      {/* Later, you can add additional login methods or a signup option here */}
+      {}
     </div>
   );
   
