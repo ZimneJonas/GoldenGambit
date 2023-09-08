@@ -2,12 +2,16 @@
 import { useState, useEffect } from 'react';
 
 function useBoardSize(initialScale = 0.8) {
-  const [boardSize, setBoardSize] = useState(window.innerHeight * initialScale);
+  const [boardSize, setBoardSize] = useState(Math.min(window.innerWidth, window.innerHeight) * initialScale);
 
   useEffect(() => {
+    const calculateBoardSize = () => {
+      const smallestDimension = Math.min(window.innerWidth, window.innerHeight);
+      return smallestDimension * initialScale;
+    };
+
     const handleResize = () => {
-      //TODO scale better with window.innerWidth
-      setBoardSize(window.innerHeight * initialScale);
+      setBoardSize(calculateBoardSize());
     };
 
     window.addEventListener('resize', handleResize);
